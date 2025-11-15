@@ -11,7 +11,12 @@
 #include <algorithm>
 #include <functional>
 #include <unordered_map>
-#include <imgui.h>
+// Rothko: use vendored Dear ImGui headers
+// The original upstream header used `#include <imgui.h>`, which expects
+// imgui to be installed on the global include path. In this repository we
+// vendor imgui under ThirdParty/imgui, so include it via an explicit
+// relative path to ensure Xcode/SwiftPM can always resolve it.
+#include "../../imgui/imgui.h"
 #include "../src/imgui_bezier_math.h"
 #include "../src/context_wrapper.h"
 

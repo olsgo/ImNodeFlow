@@ -1,4 +1,7 @@
-#include "ImNodeFlow.h"
+// Rothko: include ImNodeFlow from the vendored include directory using
+// an explicit relative path to avoid relying on global header search
+// paths during C++ interop builds.
+#include "../include/ImNodeFlow.h"
 
 namespace ImFlow {
     // -----------------------------------------------------------------------------------------------------------------

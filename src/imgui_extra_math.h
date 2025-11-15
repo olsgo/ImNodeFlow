@@ -18,8 +18,11 @@
 # ifndef IMGUI_DEFINE_MATH_OPERATORS
 #     define IMGUI_DEFINE_MATH_OPERATORS
 # endif
-# include <imgui.h>
-# include <imgui_internal.h>
+// Rothko: use vendored Dear ImGui headers via explicit relative paths.
+// Upstream expects imgui headers on the global include path; in this
+// repository we vendor them under ThirdParty/imgui.
+# include "../../imgui/imgui.h"
+# include "../../imgui/imgui_internal.h"
 
 
 //------------------------------------------------------------------------------

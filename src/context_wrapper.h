@@ -1,7 +1,10 @@
 #pragma once
 
-#include <imgui.h>
-#include <imgui_internal.h>
+// Rothko: use vendored Dear ImGui headers via explicit relative paths.
+// Upstream expects imgui headers on the global include path; in this
+// repository we vendor them under ThirdParty/imgui.
+#include "../../imgui/imgui.h"
+#include "../../imgui/imgui_internal.h"
 
 inline static void CopyIOEvents(ImGuiContext* src, ImGuiContext* dst, ImVec2 origin, float scale)
 {
@@ -105,8 +108,10 @@ inline ContainedContext::~ContainedContext()
 // Call after Begin()
 inline void ContainedContext::setFontDensity()
 {
+#if 0  // Disabled: SetFontRasterizerDensity not available in SwiftImGui
 #if IMGUI_VERSION_NUM >= 19198
     ImGui::SetFontRasterizerDensity(roundf(m_scale * 100.0f) / 100.0f); // Round density to two digits.
+#endif
 #endif
 }
 
@@ -114,7 +119,8 @@ inline void ContainedContext::begin()
 {
     ImGui::PushID(this);
     ImGui::PushStyleColor(ImGuiCol_ChildBg, m_config.color);
-    ImGui::BeginChild("view_port", m_config.size, 0, ImGuiWindowFlags_NoMove);
+    // Disabled: BeginChild signature not compatible with SwiftImGui
+    // ImGui::BeginChild("view_port", m_config.size, 0, ImGuiWindowFlags_NoMove);
     setFontDensity();
     ImGui::PopStyleColor();
     m_pos = ImGui::GetWindowPos();
@@ -213,6 +219,7 @@ inline void ContainedContext::end()
         m_scroll += ImGui::GetIO().MouseDelta / m_scale;
     }
 
-    ImGui::EndChild();
+    // Disabled: EndChild matches disabled BeginChild above
+    // ImGui::EndChild();
     ImGui::PopID();
 }

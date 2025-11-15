@@ -1,6 +1,9 @@
 #pragma once
 
-#include "ImNodeFlow.h"
+// Rothko: include ImNodeFlow from the vendored include directory using
+// a stable relative path so that SwiftPM/Xcode do not depend on
+// external header search paths for this third-party library.
+#include "../include/ImNodeFlow.h"
 
 namespace ImFlow
 {
